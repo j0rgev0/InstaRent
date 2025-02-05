@@ -8,7 +8,6 @@ import { ThemedView } from '@/components/ThemedView';
 export default function HomeScreen() {
   return (
     <ParallaxScrollView
-      
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
@@ -17,8 +16,8 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">HOLA</ThemedText>
-        <HelloWave />
+        <ThemedText type="title">Chat</ThemedText>
+        
       </ThemedView>
 
     </ParallaxScrollView>
@@ -30,6 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    backgroundColor: 'red',
 
   },
 
