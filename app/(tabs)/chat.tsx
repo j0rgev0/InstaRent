@@ -16,7 +16,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Chat</ThemedText>
+        <ThemedText type="title">CHAT CHAT CHAT </ThemedText>
         
       </ThemedView>
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    backgroundColor: 'red',
+    backgroundColor: 'green',
 
   },
 

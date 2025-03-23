@@ -36,7 +36,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="like"
         options={{
-          title: '',
+          title: 'Like',
         
         }}
       />
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     marginBottom: 30,
-    marginLeft: 21,
-    marginRight: 21,
-    paddingTop: 15,
+    marginLeft: 15,
+    marginRight: 15,
+    paddingTop: 20,
   },
 });

@@ -19,5 +19,3 @@ Pasos a seguir luego de clonar el repositorio.
    ```
 
 3. Seguir los pasos que aparezcan cuando se termine de ejecutar el comando.
-
-
