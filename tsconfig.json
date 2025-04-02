@@ -2,6 +2,11 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "noEmit": true,
+    "target": "esnext",
+    "esModuleInterop": true,
     "paths": {
       "@/*": ["./*"],
       "@better-auth/expo/client": ["./node_modules/@better-auth/expo/dist/client.d.ts"]
