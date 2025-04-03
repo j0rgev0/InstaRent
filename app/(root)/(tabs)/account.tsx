@@ -17,7 +17,7 @@ export default function Page() {
             }}
           />
           <View style={{ gap: 4 }}>
-            <Form.Text style={Form.FormFont.default}>Evan's world</Form.Text>
+            <Form.Text style={Form.FormFont.default}>Jorge's world</Form.Text>
             <Form.Text style={Form.FormFont.caption}>Today</Form.Text>
           </View>
         </Form.HStack>

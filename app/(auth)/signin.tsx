@@ -26,7 +26,7 @@ export default function SignInPage() {
           console.log(ctx);
         },
         onSuccess: () => {
-          router.replace("/(root)/(tabs)/home");
+          router.replace("/(root)/(tabs)/account");
         },
       }
     );
@@ -60,7 +60,7 @@ export default function SignInPage() {
         <Button title="Sign In" loadingTitle="Signing In..." loading={loading} onPress={handleSignIn} />
         <Text style={styles.footerText}>
           Don't have an account?{" "}
-          <Link href={"./(auth)/signup"} replace>
+          <Link href={"/(auth)/signup"} replace>
             <Text style={{ color: "#037ced" }}>Sign Up</Text>
           </Link>{" "}
           instead.
