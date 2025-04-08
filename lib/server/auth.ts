@@ -19,4 +19,8 @@ export const auth = betterAuth({
   },
   plugins: [expo()],
   trustedOrigins: ["myapp://", "http://", "exp://"],
+  session: {
+    expiresIn: 60 * 60 * 24 * 30, // 30 days
+    updateAge: 60 * 60 * 24 // 1 day (every 1 day the session expiration is updated)
+  },
 });
