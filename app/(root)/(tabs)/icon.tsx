@@ -18,7 +18,7 @@ export default function Page() {
     "https://github.com/kitten.png",
   ];
   return (
-    <>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Stack.Screen options={{ title: "App Icon" }} />
       <ScrollView horizontal contentContainerStyle={{ padding: 24, gap: 32 }}>
         {icons.map((icon) => (
@@ -44,16 +44,8 @@ export default function Page() {
               <Image
                 source={{ uri: icon }}
                 style={{
-                  borderRadius: 20,
-                  aspectRatio: 1,
-                  transform: [{ translateY: 12 }, { scaleY: -1 }],
                   width: 72,
-                  // TODO: Not supported on iOS yet
-                  filter: [{ blur: 10 }],
-
-                  // Add gradient mask
-                  maskImage:
-                    "linear-gradient(to top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 50%)",
+                  height: 72,
                 }}
               />
             ) : (
@@ -80,12 +72,8 @@ export default function Page() {
                 <Image
                   source={{ uri: icon }}
                   style={{
-                    borderRadius: 20,
-                    aspectRatio: 1,
-                    transform: [{ scaleY: -1 }],
+                    height: 72,
                     width: 72,
-                    // TODO: Not supported on iOS yet
-                    filter: [{ blur: 10 }],
                   }}
                 />
               </MaskedView>
@@ -93,6 +81,6 @@ export default function Page() {
           </TouchableBounce>
         ))}
       </ScrollView>
-    </>
+    </View>
   );
 }

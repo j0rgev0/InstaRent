@@ -1,18 +1,31 @@
-import ThemeProvider from "@/components/ui/ThemeProvider";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { View } from "react-native";
 
-import Tabs from "@/components/ui/Tabs";
-
-export default function Layout() {
+export default function AppLayout() {
   return (
-    <ThemeProvider>
-      <Tabs>
-        <Tabs.Screen name="(index)" systemImage="house.fill" title="Home" />
-        <Tabs.Screen
-          name="(info)"
-          systemImage="cursorarrow.rays"
-          title="Info"
+    <View style={{ flex: 1 }}>
+      <StatusBar style="dark" />
+      <Stack>
+        <Stack.Screen
+          name="index"
+          options={{
+            headerShown: false,
+          }}
         />
-      </Tabs>
-    </ThemeProvider>
+        <Stack.Screen
+          name="(auth)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="(root)"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack>
+    </View>
   );
 }

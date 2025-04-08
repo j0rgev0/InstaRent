@@ -11,7 +11,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 export default function Page() {
-  const ref = useAnimatedRef();
+  const ref = useAnimatedRef<Animated.ScrollView>();
   const scroll = useScrollViewOffset(ref);
   const style = useAnimatedStyle(() => ({
     transform: [
@@ -46,7 +46,7 @@ export default function Page() {
               </View>
             ),
             headerTitle() {
-              return <></>;
+              return <Text>Bottom Sheet</Text>
             },
           }}
         />

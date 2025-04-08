@@ -52,7 +52,7 @@ function Switches() {
 }
 
 export default function Page() {
-  const ref = useAnimatedRef();
+  const ref = useAnimatedRef<Animated.ScrollView>();
   const scroll = useScrollViewOffset(ref);
   const style = useAnimatedStyle(() => {
     return {

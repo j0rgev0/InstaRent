@@ -11,9 +11,8 @@ export default function Page() {
           <Image
             source={{ uri: "https://github.com/evanbacon.png" }}
             style={{
-              aspectRatio: 1,
               height: 48,
-              borderRadius: 999,
+              width: 48,
             }}
           />
           <View style={{ gap: 4 }}>

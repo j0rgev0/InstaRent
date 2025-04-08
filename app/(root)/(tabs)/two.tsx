@@ -37,14 +37,14 @@ export default function Page() {
 function FadeInTest() {
   const [show, setShow] = useState(false);
   return (
-    <>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text onPress={() => setShow(!show)}>Toggle</Text>
       {show && (
         <FadeIn>
           <Text>FadeIn</Text>
         </FadeIn>
       )}
-    </>
+    </View>
   );
 }
 
