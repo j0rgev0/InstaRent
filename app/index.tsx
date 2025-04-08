@@ -2,8 +2,8 @@ import Button from "@/components/Button";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StyleSheet, Text, View } from "react-native";
-import { useEffect } from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
 
 const IndexPage = () => {
@@ -12,15 +12,14 @@ const IndexPage = () => {
 
   useEffect(() => {
     if (session) {
-      // Redirige automáticamente si ya tiene sesión
-      router.replace("/home"); // Cambia "/home" por tu pantalla principal protegida
+      router.replace("/profile")
     }
   }, [session]);
 
   if (isPending) {
     return (
       <SafeAreaView style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Cargando sesión...</Text>
+        <ActivityIndicator/>
       </SafeAreaView>
     );
   }
@@ -28,7 +27,7 @@ const IndexPage = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <View style={[styles.subContainer, { gap: 32 }]}>
+        {/* <View style={[styles.subContainer, { gap: 32 }]}>
           <Image
             source={require("@/assets/images/react-logo.png")}
             style={{ height: 250, width: 250 }}
@@ -38,8 +37,8 @@ const IndexPage = () => {
           <Text style={styles.subtitleText}>
             Example React Native Expo application demonstrating authentication flow using Better Auth.
           </Text>
-        </View>
-        <View style={[styles.subContainer, { justifyContent: "center", gap: 32 }]}>
+        </View> */}
+        <View style={[styles.subContainer, { justifyContent: "center", gap: 30 }]}>
           <Button title="Sign In" onPress={() => router.replace("./(auth)/signin")} />
           <Button title="Sign Up" onPress={() => router.replace("./(auth)/signup")} />
         </View>

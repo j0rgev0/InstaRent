@@ -30,13 +30,6 @@ export default function RootLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          headerTitle: "Settings",
-          tabBarLabel: "Settings",
-        }}
-      />
     </Tabs>
   );
 }
