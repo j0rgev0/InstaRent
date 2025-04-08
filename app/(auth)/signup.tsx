@@ -31,7 +31,7 @@ export default function SignUpPage() {
           Alert.alert("Account created", "Successfully created an account for Expo Better Auth.", [
             {
               text: "Continue",
-              onPress: () => router.replace("/(root)/(tabs)/home"),
+              onPress: () => router.replace("/(root)/(tabs)/profile"),
             },
           ]);
         },

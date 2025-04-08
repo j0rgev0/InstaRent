@@ -3,9 +3,28 @@ import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, Text, View } from "react-native";
+import { useEffect } from "react";
+import { authClient } from "@/lib/auth-client";
 
 const IndexPage = () => {
   const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
+
+  useEffect(() => {
+    if (session) {
+      // Redirige automáticamente si ya tiene sesión
+      router.replace("/home"); // Cambia "/home" por tu pantalla principal protegida
+    }
+  }, [session]);
+
+  if (isPending) {
+    return (
+      <SafeAreaView style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Cargando sesión...</Text>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -44,7 +63,7 @@ const styles = StyleSheet.create({
   },
   headingText: {
     fontSize: 28,
-    fontWeight: 700,
+    fontWeight: "700",
   },
   subtitleText: {
     fontSize: 20,
