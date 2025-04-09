@@ -24,7 +24,6 @@
     "@react-native-segmented-control/segmented-control": "2.5.4",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
-    "babel": "^5.8.38",
     "better-auth": "^1.2.5",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.41.0",
@@ -55,15 +54,9 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.27.0",
-    "@babel/core": "^7.26.10",
-    "@babel/preset-env": "^7.26.9",
-    "@babel/preset-react": "^7.26.3",
-    "@babel/preset-typescript": "^7.27.0",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
     "@types/react-test-renderer": "^18.3.0",
-    "babel-plugin-module-resolver": "^5.0.2",
     "drizzle-kit": "^0.18.1",
     "eslint": "^8.57.0",
     "eslint-config-expo": "~8.0.1",
