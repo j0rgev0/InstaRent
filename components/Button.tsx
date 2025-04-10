@@ -1,5 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React from "react";
+
+import "@/global.css"
 
 interface ButtonProps {
   title: string;
@@ -12,30 +14,14 @@ const Button = ({ title, loadingTitle = title, loading = false, onPress }: Butto
   return (
     <TouchableOpacity
       activeOpacity={0.77}
-      style={[styles.container, { backgroundColor: loading ? "#777777" : "#000000" }]}
+      className="flex-row items-center justify-center gap-2 rounded-md p-4 bg-black"
       onPress={onPress}
       disabled={loading}
     >
       {loading && <ActivityIndicator color={"white"} />}
-      <Text style={styles.buttonText}>{loading ? loadingTitle : title}</Text>
+      <Text className="text-white text-lg font-bold">{loading ? loadingTitle : title}</Text>
     </TouchableOpacity>
   );
 };
 
 export default Button;
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    gap: 8,
-    padding: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 18,
-  },
-});

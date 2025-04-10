@@ -6,6 +6,8 @@ import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
 
+import "@/global.css"
+
 const IndexPage = () => {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
@@ -26,19 +28,8 @@ const IndexPage = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        {/* <View style={[styles.subContainer, { gap: 32 }]}>
-          <Image
-            source={require("@/assets/images/react-logo.png")}
-            style={{ height: 250, width: 250 }}
-            contentFit="cover"
-          />
-          <Text style={styles.headingText}>Better Auth</Text>
-          <Text style={styles.subtitleText}>
-            Example React Native Expo application demonstrating authentication flow using Better Auth.
-          </Text>
-        </View> */}
-        <View style={[styles.subContainer, { justifyContent: "center", gap: 30 }]}>
+      <View className="flex-1 p-4 gap-4">
+        <View className="flex-1 items-center justify-center gap-4">
           <Button title="Sign In" onPress={() => router.replace("./(auth)/signin")} />
           <Button title="Sign Up" onPress={() => router.replace("./(auth)/signup")} />
         </View>
@@ -48,24 +39,3 @@ const IndexPage = () => {
 };
 
 export default IndexPage;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    alignItems: "center",
-  },
-  subContainer: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-  },
-  headingText: {
-    fontSize: 28,
-    fontWeight: "700",
-  },
-  subtitleText: {
-    fontSize: 20,
-    textAlign: "center",
-  },
-});
