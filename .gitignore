@@ -13,6 +13,8 @@ android/
 .expo/
 dist/
 web-build/
+
+# Typescript
 expo-env.d.ts
 nativewind-env.d.ts
 app-env.d.ts
