@@ -3,7 +3,10 @@
 # dependencies
 node_modules/
 
+# iOS
 ios/
+
+# Android
 android/
 
 # Expo
@@ -11,6 +14,8 @@ android/
 dist/
 web-build/
 expo-env.d.ts
+nativewind-env.d.ts
+app-env.d.ts
 
 # Native
 *.orig.*
