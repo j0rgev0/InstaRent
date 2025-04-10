@@ -3,8 +3,8 @@
 # dependencies
 node_modules/
 
-ios
-android
+ios/
+android/
 
 # Expo
 .expo/
