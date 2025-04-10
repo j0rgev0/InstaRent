@@ -4,7 +4,7 @@ import { Link } from "expo-router";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { authClient } from "@/lib/auth-client";
-import { View, StyleSheet, Text, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
+import { View, Text, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -43,8 +43,8 @@ export default function SignUpPage() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
-        <Text style={styles.headerText}>Create a new account using a username, email and password.</Text>
+      <View className="flex-1 p-4 gap-4">
+        <Text className="text-lg font-bold">Create a new account using a username, email and password.</Text>
         <InputTextField
           editable={!loading}
           subtitle="Username"
@@ -73,10 +73,10 @@ export default function SignUpPage() {
           secureTextEntry
         />
         <Button title="Sign Up" loadingTitle="Signing Up..." loading={loading} onPress={handleSignUp} />
-        <Text style={styles.footerText}>
+        <Text className="text-center text-gray-500">
           Already have an account?{" "}
           <Link href={"/(auth)/signin"} replace>
-            <Text style={{ color: "#037ced" }}>Sign In</Text>
+            <Text className="text-blue-500">Sign In</Text>
           </Link>{" "}
           instead.
         </Text>
@@ -84,18 +84,3 @@ export default function SignUpPage() {
     </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    gap: 20,
-  },
-  headerText: {
-    fontSize: 16,
-  },
-  footerText: {
-    textAlign: "center",
-    color: "gray",
-  },
-});

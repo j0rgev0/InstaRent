@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet, TouchableOpacity, KeyboardType } from "react-native";
+import { View, TextInput, Text, TouchableOpacity, KeyboardType } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 interface InputTextFieldProps {
@@ -9,7 +9,6 @@ interface InputTextFieldProps {
   value: string;
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
-  style?: object;
   editable?: boolean;
   keyboardType?: KeyboardType;
 }
@@ -22,18 +21,17 @@ const InputTextField = ({
   onChangeText,
   secureTextEntry = false,
   editable = true,
-  style,
   keyboardType = "default",
 }: InputTextFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <View style={[styles.container, style]}>
-      {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
-      <View style={styles.inputContainer}>
-        {iconName && <Ionicons name={iconName} size={24} color="black" style={styles.icon} />}
+    <View className='gap-2'>
+      {subtitle && <Text className="text-sm font-bold">{subtitle}</Text>}
+      <View className="flex-row items-center border border-black rounded-md h-12">
+        {iconName && <Ionicons name={iconName} size={24} color="black" className="p-2" />}
         <TextInput
-          style={styles.input}
+          className="flex-1"
           placeholder={placeholder}
           placeholderTextColor={"gray"}
           value={value}
@@ -43,7 +41,7 @@ const InputTextField = ({
           keyboardType={keyboardType}
         />
         {secureTextEntry && (
-          <TouchableOpacity style={styles.eyeIcon} onPress={() => setShowPassword(!showPassword)}>
+          <TouchableOpacity className="p-2" onPress={() => setShowPassword(!showPassword)}>
             <Ionicons name={showPassword ? "eye-off" : "eye"} size={24} color="gray" />
           </TouchableOpacity>
         )}
@@ -52,34 +50,5 @@ const InputTextField = ({
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
-  subtitle: {
-    fontSize: 14,
-    color: "black",
-    marginBottom: 5,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderColor: "black",
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 50,
-  },
-  icon: {
-    padding: 10,
-  },
-  input: {
-    flex: 1,
-    height: "100%",
-    paddingHorizontal: 10,
-  },
-  eyeIcon: {
-    padding: 10,
-  },
-});
 
 export default InputTextField;

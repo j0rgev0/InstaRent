@@ -1,8 +1,7 @@
 import Button from "@/components/Button";
-import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
 
@@ -20,18 +19,31 @@ const IndexPage = () => {
 
   if (isPending) {
     return (
-      <SafeAreaView style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <SafeAreaView className="flex-1 justify-center items-center bg-white">
         <ActivityIndicator/>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View className="flex-1 p-4 gap-4">
-        <View className="flex-1 items-center justify-center gap-4">
-          <Button title="Sign In" onPress={() => router.replace("./(auth)/signin")} />
-          <Button title="Sign Up" onPress={() => router.replace("./(auth)/signup")} />
+    <SafeAreaView className="flex-1 bg-white">
+      <View className="flex-1 p-6">
+        <View className="flex-1 items-center justify-center gap-6">
+          <Text className="text-3xl font-bold text-center mb-8">Welcome to InstaRent</Text>
+          <View className="w-full max-w-xs gap-4">
+            <View className="w-full">
+              <Button 
+                title="Sign In" 
+                onPress={() => router.replace("./(auth)/signin")}
+              />
+            </View>
+            <View className="w-full">
+              <Button 
+                title="Sign Up" 
+                onPress={() => router.replace("./(auth)/signup")}
+              />
+            </View>
+          </View>
         </View>
       </View>
     </SafeAreaView>
