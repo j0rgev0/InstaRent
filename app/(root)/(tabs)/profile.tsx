@@ -4,8 +4,6 @@ import { authClient } from "@/lib/auth-client";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-import "@/global.css"
-
 const ProfilePage = () => {
   const { data: session } = authClient.useSession()
   return (

@@ -43,43 +43,61 @@ export default function SignUpPage() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View className="flex-1 p-4 gap-4">
-        <Text className="text-lg font-bold">Create a new account using a username, email and password.</Text>
-        <InputTextField
-          editable={!loading}
-          subtitle="Username"
-          placeholder="Create a username"
-          iconName="mail-outline"
-          value={name}
-          onChangeText={setName}
-        />
-        <InputTextField
-          editable={!loading}
-          subtitle="Email"
-          placeholder="Enter your email"
-          iconName="mail-outline"
-          value={email}
-          keyboardType="email-address"
-          onChangeText={setEmail}
-        />
-        <InputTextField
-          editable={!loading}
-          subtitle="Password"
-          placeholder="Create a password"
-          iconName="lock-closed-outline"
-          value={password}
-          keyboardType="default"
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <Button title="Sign Up" loadingTitle="Signing Up..." loading={loading} onPress={handleSignUp} />
-        <Text className="text-center text-gray-500">
-          Already have an account?{" "}
-          <Link href={"/(auth)/signin"} replace>
-            <Text className="text-blue-500">Sign In</Text>
-          </Link>{" "}
-          instead.
-        </Text>
+      <View className="flex-1 bg-white justify-center">
+        <View className="px-6 py-8">
+          <View className="items-center mb-5">
+            <Text className="text-2xl font-bold text-gray-800 mb-2">Create Account</Text>
+            <Text className="text-gray-500 text-center">Sign up to get started with your account</Text>
+          </View>
+
+          <View className="space-y-4">
+            <InputTextField
+              editable={!loading}
+              subtitle="Username"
+              placeholder="Create a username"
+              iconName="person-outline"
+              value={name}
+              onChangeText={setName}
+            />
+            <InputTextField
+              editable={!loading}
+              subtitle="Email"
+              placeholder="Enter your email"
+              iconName="mail-outline"
+              value={email}
+              keyboardType="email-address"
+              onChangeText={setEmail}
+            />
+            <InputTextField
+              editable={!loading}
+              subtitle="Password"
+              placeholder="Create a password"
+              iconName="lock-closed-outline"
+              value={password}
+              keyboardType="default"
+              onChangeText={setPassword}
+              secureTextEntry
+            />
+          </View>
+
+          <View className="mt-6">
+            <Button 
+              title="Sign Up" 
+              loadingTitle="Signing Up..." 
+              loading={loading} 
+              onPress={handleSignUp}
+            />
+          </View>
+
+          <View className="mt-6 flex-row justify-center">
+            <Text className="text-gray-500">
+              Already have an account?{" "}
+              <Link href={"/(auth)/signin"} replace>
+                <Text className="text-blue-500 font-semibold">Sign In</Text>
+              </Link>
+            </Text>
+          </View>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );

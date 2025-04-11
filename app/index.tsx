@@ -5,8 +5,6 @@ import { ActivityIndicator, Text, View } from "react-native";
 import React, { useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
 
-import "@/global.css"
-
 const IndexPage = () => {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();

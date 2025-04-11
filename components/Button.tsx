@@ -1,8 +1,6 @@
 import { Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React from "react";
 
-import "@/global.css"
-
 interface ButtonProps {
   title: string;
   loadingTitle?: string;
