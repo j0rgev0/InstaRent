@@ -4,15 +4,19 @@
 node_modules/
 
 # iOS
-ios/
+ios
 
 # Android
-android/
+android
 
 # Expo
 .expo/
 dist/
 web-build/
+
+.vscode/
+.metro-cache/
+
 
 # Typescript
 expo-env.d.ts
