@@ -30,16 +30,6 @@ export default function RootLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="account"
-        options={{
-          tabBarLabel: " ",
-          headerShown: false,
-          tabBarIcon: ({ color, size, focused }) => (
-            <Ionicons name={focused ? "person" : "person-outline"} color={color} size={size} />
-          ),
-        }}
-      />
     </Tabs>
   );
 }
