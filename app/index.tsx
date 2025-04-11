@@ -29,7 +29,7 @@ const IndexPage = () => {
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 p-6">
         <View className="flex-1 items-center justify-center gap-6">
-          <Text className="text-3xl font-bold text-center mb-8">Welcome to InstaRent</Text>
+          <Text className="text-3xl font-bold text-center mb-8">Welcome</Text>
           <View className="w-full max-w-xs gap-4">
             <View className="w-full">
               <Button 
