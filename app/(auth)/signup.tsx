@@ -6,6 +6,8 @@ import { useRouter } from "expo-router";
 import { authClient } from "@/lib/auth-client";
 import { View, Text, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 
+import '@/global.css'
+
 export default function SignUpPage() {
   const router = useRouter();
 
