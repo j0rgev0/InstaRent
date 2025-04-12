@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Image, Alert } from "react-native"
+import { Text, View, TouchableOpacity, Image, Alert, Platform } from "react-native"
 import React, { useState } from "react"
 import { authClient } from "@/lib/auth-client";
 import { router } from "expo-router";
@@ -85,7 +85,7 @@ const ProfilePage = () => {
         <View className="bg-white p-5 items-center border-b border-gray-200">
           <TouchableOpacity 
             className="w-32 h-32 rounded-full bg-gray-100 justify-center items-center mb-4"
-            onPress={() => showImageOptions()}
+            onPress={() => Platform.OS === 'ios' || Platform.OS === 'android' ? showImageOptions() : selectImage()}
           >
             {session?.user.image ? (
               <Image 

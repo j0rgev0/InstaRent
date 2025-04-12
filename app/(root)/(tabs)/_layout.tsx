@@ -43,13 +43,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     height: Platform.OS === 'ios' ? 80 : 60,
     borderColor: 'rgba(255, 255, 255, 0)',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
     elevation: 5,
   }
 })
