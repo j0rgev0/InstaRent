@@ -4,8 +4,11 @@ import { authClient } from "@/lib/auth-client";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from 'expo-file-system';
 
 import '@/global.css'
+
+const CLOUDINARY_CLOUD_NAME = 'dvcreogik'
 
 const ProfilePage = () => {
   const { data: session } = authClient.useSession()
@@ -42,16 +45,74 @@ const ProfilePage = () => {
 
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
-        quality: 1,
-        aspect: [1, 1]
-      });
+        quality: 0.8,
+        aspect: [1, 1],
+        base64: true
+      })
 
       if (!result.canceled) {
         const imageUri = result.assets[0].uri;
         setSelectedImage(imageUri);
         
         if (session) {
+          // Actualiza temporalmente la imagen en la sesión
           session.user.image = imageUri;
+
+          try {
+            console.log('Preparing upload to Cloudinary...');
+            
+            const xhr = new XMLHttpRequest();
+            const formData = new FormData();
+            
+            const fileUri = result.assets[0].uri;
+            const filename = fileUri.split('/').pop() || 'image.jpg';
+            
+            const localUri = Platform.OS === 'ios' ? fileUri.replace('file://', '') : fileUri;
+            
+            const file = {
+              uri: localUri,
+              name: filename,
+              type: 'image/jpeg'
+            };
+            
+            // @ts-ignore
+            formData.append('file', file);
+            formData.append('upload_preset', 'profileImage');
+            
+
+            xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`);
+
+            xhr.onload = async function() {
+              if (xhr.status >= 200 && xhr.status < 300) {
+                const response = JSON.parse(xhr.responseText);
+                console.log('Upload successful!', response.url);
+                
+                if (response.url) {
+                  await authClient.updateUser({ image: response.url });
+
+                  session.user.image = response.url;
+                }
+              } else {
+                console.error('Upload failed:', xhr.responseText);
+                alert('Failed to upload image. Please try again.');
+              }
+
+            };
+            
+
+            xhr.onerror = function() {
+              console.error('Upload error:', xhr.responseText);
+              alert('Network error occurred. Please try again.');
+
+            };
+
+            xhr.send(formData);
+            
+          } catch (error) {
+            console.error('Error uploading image to Cloudinary:', error);
+            alert('Failed to upload image. Please try again.');
+
+          }
         }
       }
     } catch (error) {
@@ -85,15 +146,15 @@ const ProfilePage = () => {
         <View className="bg-white p-5 items-center border-b border-gray-200">
           <TouchableOpacity 
             className="w-32 h-32 rounded-full bg-gray-100 justify-center items-center mb-4"
-            onPress={() => Platform.OS === 'ios' || Platform.OS === 'android' ? showImageOptions() : selectImage()}
+            onPress={() => (Platform.OS === 'ios' || Platform.OS === 'android' ? showImageOptions() : selectImage())}
           >
             {session?.user.image ? (
               <Image 
                 source={{ uri: (session?.user.image) as string }} 
-                className="w-full h-full rounded-full"  
+                className="w-full h-full rounded-full" 
               />
             ) : (
-              <Ionicons name="person-circle" size={100} color="#353949" />
+                <Ionicons name="person-circle" size={100} color="#353949" />
             )}
           </TouchableOpacity>
           <Text className="text-2xl font-bold text-gray-800 mb-2">{session?.user.name}</Text>
@@ -101,7 +162,7 @@ const ProfilePage = () => {
         </View>
         
         <View className="flex-1 p-5">
-          <TouchableOpacity
+          <TouchableOpacity 
             className="flex-row bg-darkBlue p-4 rounded-lg items-center justify-center mt-5"
             onPress={() => authClient.signOut().then(() => router.replace("/"))}
           >
