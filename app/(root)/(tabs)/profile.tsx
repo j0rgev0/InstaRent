@@ -5,10 +5,10 @@ import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from 'expo-file-system';
+import { CLOUDINARY_CLOUD_NAME } from "@/utils/constants";
 
 import '@/global.css'
 
-const CLOUDINARY_CLOUD_NAME = 'dvcreogik'
 
 const ProfilePage = () => {
   const { data: session } = authClient.useSession()
@@ -28,7 +28,7 @@ const ProfilePage = () => {
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
+          style: "destructive"
         }
       ]
     )

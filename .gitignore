@@ -9,6 +9,8 @@ ios
 # Android
 android
 
+utils/constants.ts
+
 # Expo
 .expo/
 dist/
