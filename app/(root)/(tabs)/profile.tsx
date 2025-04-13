@@ -51,7 +51,7 @@ const ProfilePage = () => {
         quality: 0.8,
         aspect: [1, 1],
         base64: Platform.OS !== 'web',
-        mediaTypes: ImagePicker.MediaTypeOptions.Images
+        mediaTypes: 'images'
       })
 
       if (!result.canceled) {
