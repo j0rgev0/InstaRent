@@ -4,7 +4,6 @@ import { authClient } from "@/lib/auth-client";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from 'expo-file-system';
 import { CLOUDINARY_CLOUD_NAME } from "@/utils/constants";
 
 import '@/global.css'
@@ -167,6 +166,7 @@ const ProfilePage = () => {
             <Ionicons name="menu" size={32} className="text-darkBlue" />
           </TouchableOpacity>
         </View>
+
         <View className="bg-white p-5 items-center border-b border-gray-200">
           <TouchableOpacity 
             className="w-32 h-32 rounded-full bg-gray-100 justify-center items-center mb-4"
@@ -205,6 +205,5 @@ const ProfilePage = () => {
   }
 };
 
-export default ProfilePage;
-
+export default ProfilePage
 
