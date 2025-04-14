@@ -4,17 +4,9 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="(tabs)"
+        name="editProfile"
         options={{
-          headerTitle: "",
           headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="(editProfile)"
-        options={{
-          headerTitle: "Edit profile",
-          headerShown: true,
         }}
       />
     </Stack>

@@ -23,7 +23,7 @@ export default function RootLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          tabBarLabel: " ",
+          tabBarLabel: "",
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons name={focused ? "person" : "person-outline"} color={color} size={size} />

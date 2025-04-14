@@ -159,6 +159,14 @@ const ProfilePage = () => {
   } else {
     return (
       <View className="flex-1 bg-gray-50 pt-10">
+        <View className="flex-row bg-white justify-end pt-4 px-4">
+          <TouchableOpacity
+            onPress={() => {router.push("/(root)/(editProfile)/editProfile")}}
+            activeOpacity={0.8}
+          >
+            <Ionicons name="menu" size={32} className="text-darkBlue" />
+          </TouchableOpacity>
+        </View>
         <View className="bg-white p-5 items-center border-b border-gray-200">
           <TouchableOpacity 
             className="w-32 h-32 rounded-full bg-gray-100 justify-center items-center mb-4"
@@ -176,7 +184,7 @@ const ProfilePage = () => {
                 className="w-full h-full rounded-full" 
               />
             ) : (
-                <Ionicons name="person-circle" size={100} color="#353949" />
+                <Ionicons name="person-circle" size={100} className="text-darkBlue" />
             )}
           </TouchableOpacity>
           <Text className="text-2xl font-bold text-gray-800 mb-2">{session?.user.name}</Text>
