@@ -1,6 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
-import { TouchableOpacity } from "react-native";
 
 export default function RootLayout() {
   return (
