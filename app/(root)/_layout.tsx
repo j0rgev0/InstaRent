@@ -1,4 +1,6 @@
-import { Stack } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { router, Stack } from "expo-router";
+import { TouchableOpacity } from "react-native";
 
 export default function RootLayout() {
   return (
@@ -14,6 +16,7 @@ export default function RootLayout() {
         name="(editProfile)"
         options={{
           headerTitle: "Edit profile",
+          headerTitleAlign: "center",
           headerShown: true,
         }}
       />
