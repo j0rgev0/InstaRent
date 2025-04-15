@@ -18,7 +18,17 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [expo(), username()],
+  plugins: [expo(), 
+    username({
+      maxUsernameLength: 65,
+      minUsernameLength: 2,
+      usernameValidator: (username) => {
+        if (username === "admin") {
+            return false
+        }
+        return true
+      }
+    })],
   trustedOrigins: ['myapp://', 'http://', 'exp://'],
   session: {
     expiresIn: 60 * 60 * 24 * 3, // 3 days

@@ -60,7 +60,7 @@ export default function SignUpPage() {
               editable={!loading}
               subtitle="Username"
               placeholder="Create a username"
-              iconName="person-outline"
+              iconName="person-circle-outline"
               value={username}
               onChangeText={setUsername}
             />
@@ -68,7 +68,7 @@ export default function SignUpPage() {
               editable={!loading}
               subtitle="Name"
               placeholder="Enter your name"
-              iconName="person-add-outline"
+              iconName="person-outline"
               value={name}
               onChangeText={setName}
             />

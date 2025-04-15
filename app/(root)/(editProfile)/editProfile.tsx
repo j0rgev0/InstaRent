@@ -7,6 +7,7 @@ import {
   Image,
   Alert,
   TextInput,
+  Button,
 } from 'react-native';
 import { authClient } from '@/lib/auth-client';
 import React, { useState } from 'react';
@@ -15,11 +16,18 @@ import { Ionicons } from '@expo/vector-icons';
 import { CLOUDINARY_CLOUD_NAME } from '@/utils/constants';
 
 import '@/global.css';
+import InputTextField from '@/components/InputTextField';
+import { router } from 'expo-router';
 
 const EdituserPage = () => {
   const { data: session } = authClient.useSession();
+
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(false);
   const [name, setName] = useState(session?.user.name || '');
+  const [email, setEmail] = useState(session?.user.email || '');
+  // @ts-ignore
+  const [username, setUsername] = useState(session?.user.username || '');
 
   const showImageOptions = () => {
     Alert.alert('Profile Image', 'What would you like to do?', [
@@ -134,11 +142,26 @@ const EdituserPage = () => {
     }
   };
 
+  const handleSave = async () => {
+    try {
+      await authClient.updateUser({
+        name: name,
+        // @ts-ignore
+        username: username,
+      });
+      alert('Profile updated successfully 🎉')
+      router.back()
+    } catch (error) {
+      console.error('Error updating profile:', error)
+      alert('Failed to update profile. Please try again.')
+    }
+  };
+
   return (
     <ScrollView className="bg-white">
       <View className="items-center border-b border-gray-200 bg-white p-5">
         <TouchableOpacity
-          className="h-24 w-24 items-center justify-center rounded-full"
+          className="mb-4 h-24 w-24 items-center justify-center rounded-full bg-gray-100"
           onPress={() => {
             if (Platform.OS === 'web') {
               selectImage();
@@ -152,19 +175,54 @@ const EdituserPage = () => {
               className="h-full w-full rounded-full"
             />
           ) : (
-            <Ionicons name="person-circle" size={100} color="#1E3A8A" />
+            <Ionicons name="person-circle" size={100} className="text-darkBlue" />
           )}
         </TouchableOpacity>
+        <Text
+          className="text-center text-lg text-blue-500"
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              selectImage();
+            } else {
+              showImageOptions();
+            }
+          }}>
+          Edit Picture
+        </Text>
       </View>
 
-      <View className="flex-row items-center justify-start border-b border-gray-200 bg-white p-5">
-        <Text className="w-24 text-lg">Username</Text>
-        <TextInput
-          className="ml-2 flex-1 border-b border-gray-300 py-2 text-lg"
-          maxLength={65}
+      <View className="space-y-4 border-b border-gray-200 bg-white p-5">
+        <InputTextField
+          editable={!loading}
+          subtitle="Username"
+          placeholder={username}
+          iconName="person-circle-outline"
+          value={username}
+          onChangeText={setUsername}
+        />
+        <InputTextField
+          editable={!loading}
+          subtitle="Name"
+          iconName="person-outline"
+          placeholder={name}
           value={name}
           onChangeText={setName}
         />
+        <InputTextField
+          editable={!loading}
+          subtitle="Email"
+          placeholder={email}
+          iconName="mail-outline"
+          value={email}
+          onChangeText={setEmail}
+        />
+      </View>
+      <View className="p-5">
+        <TouchableOpacity
+          className="rounded-md bg-darkBlue p-4"
+          onPress={handleSave}>
+          <Text className="text-center text-white">Save</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
