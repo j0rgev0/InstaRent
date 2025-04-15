@@ -20,9 +20,11 @@ web-build/
 .metro-cache/
 
 
-# Typescript
+
 expo-env.d.ts
+
 nativewind-env.d.ts
+
 app-env.d.ts
 
 # Native

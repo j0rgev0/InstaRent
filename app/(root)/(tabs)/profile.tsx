@@ -103,7 +103,7 @@ const ProfilePage = () => {
                 console.log('Upload successful!', response.url);
                 
                 if (response.url) {
-                  await authClient.updateUser({ image: response.url });
+                  await authClient.updateUser({ image: response.url});
                   console.log('User image updated in database');
                   session.user.image = response.url;
                 }
@@ -188,7 +188,8 @@ const ProfilePage = () => {
             )}
           </TouchableOpacity>
           <Text className="text-2xl font-bold text-gray-800 mb-2">{session?.user.name}</Text>
-          <Text className="text-base text-gray-600">{session?.user.email}</Text>
+          {/* @ts-ignore */}
+          <Text className="text-base text-gray-600">{session?.user.username}</Text>
         </View>
         
         <View className="flex-1 p-5">

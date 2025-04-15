@@ -1,4 +1,4 @@
-import { router, Stack } from "expo-router";
+import { router, Stack } from 'expo-router';
 
 export default function RootLayout() {
   return (
@@ -6,15 +6,15 @@ export default function RootLayout() {
       <Stack.Screen
         name="(tabs)"
         options={{
-          headerTitle: "",
+          headerTitle: '',
           headerShown: false,
         }}
       />
       <Stack.Screen
         name="(editProfile)"
         options={{
-          headerTitle: "Edit profile",
-          headerTitleAlign: "center",
+          headerTitle: 'Edit profile',
+          headerTitleAlign: 'center',
           headerShown: true,
         }}
       />

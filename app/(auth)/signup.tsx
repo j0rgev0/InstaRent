@@ -12,6 +12,7 @@ export default function SignUpPage() {
   const router = useRouter();
 
   const [email, setEmail] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,6 +24,8 @@ export default function SignUpPage() {
         email,
         password,
         name,
+        // @ts-ignore
+        username,
       },
       {
         onError: (ctx) => {
@@ -30,7 +33,7 @@ export default function SignUpPage() {
           console.log(ctx);
         },
         onSuccess: () => {
-          Alert.alert("Account created", "Successfully created an account for Expo Better Auth.", [
+          Alert.alert("Account created", "Successfully created an account", [
             {
               text: "Continue",
               onPress: () => router.replace("/(root)/(tabs)/profile"),
@@ -58,6 +61,14 @@ export default function SignUpPage() {
               subtitle="Username"
               placeholder="Create a username"
               iconName="person-outline"
+              value={username}
+              onChangeText={setUsername}
+            />
+            <InputTextField
+              editable={!loading}
+              subtitle="Name"
+              placeholder="Enter your name"
+              iconName="person-add-outline"
               value={name}
               onChangeText={setName}
             />
