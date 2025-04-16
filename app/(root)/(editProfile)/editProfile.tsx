@@ -224,16 +224,17 @@ const EdituserPage = () => {
           onChangeText={setName}
         />
       </View>
-      <View className="p-5">
+      <View className="space-y-4 p-5">
         <TouchableOpacity
           className="p-4"
           onPress={verifyEmail}>
-          <Text className="text-center text-lg text-blue-500">Verify Email</Text>
+          <Text className="text-lg text-blue-500">Verify Email</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           className="rounded-md bg-darkBlue p-4"
           onPress={handleSave}>
-          <Text className="text-center text-white">Save</Text>
+          <Text className="text-center text-lg text-white">Save</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
