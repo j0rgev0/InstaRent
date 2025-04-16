@@ -7,27 +7,27 @@ import {
   Image,
   Alert,
   TextInput,
-  Button,
+  Button
 } from 'react-native';
-import { authClient } from '@/lib/auth-client';
-import React, { useState } from 'react';
-import * as ImagePicker from 'expo-image-picker';
-import { Ionicons } from '@expo/vector-icons';
-import { CLOUDINARY_CLOUD_NAME } from '@/utils/constants';
+import { authClient } from '@/lib/auth-client'
+import React, { useState } from 'react'
+import * as ImagePicker from 'expo-image-picker'
+import { Ionicons } from '@expo/vector-icons'
+import { CLOUDINARY_CLOUD_NAME } from '@/utils/constants'
 
 import '@/global.css';
-import InputTextField from '@/components/InputTextField';
-import { router } from 'expo-router';
+import InputTextField from '@/components/InputTextField'
+import { router } from 'expo-router'
 
 const EdituserPage = () => {
-  const { data: session } = authClient.useSession();
+  const { data: session } = authClient.useSession()
 
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [name, setName] = useState(session?.user.name || '');
-  const [email, setEmail] = useState(session?.user.email || '');
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [name, setName] = useState(session?.user.name || '')
+  const [email, setEmail] = useState(session?.user.email || '')
   // @ts-ignore
-  const [username, setUsername] = useState(session?.user.username || '');
+  const [username, setUsername] = useState(session?.user.username || '')
 
   const showImageOptions = () => {
     Alert.alert('Profile Image', 'What would you like to do?', [
@@ -208,16 +208,19 @@ const EdituserPage = () => {
           value={name}
           onChangeText={setName}
         />
-        <InputTextField
-          editable={!loading}
-          subtitle="Email"
-          placeholder={email}
-          iconName="mail-outline"
-          value={email}
-          onChangeText={setEmail}
-        />
       </View>
       <View className="p-5">
+        <TouchableOpacity
+          className="p-4"
+          onPress={() => {
+            authClient.sendVerificationEmail({
+              email: email,
+              callbackURL: "/",
+            })
+            alert('Verification email sent to: ' + email)
+          }}>
+          <Text className="text-center text-lg text-blue-500">Verify Email</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           className="rounded-md bg-darkBlue p-4"
           onPress={handleSave}>
@@ -225,7 +228,7 @@ const EdituserPage = () => {
         </TouchableOpacity>
       </View>
     </ScrollView>
-  );
+  )
 };
 
 export default EdituserPage;
