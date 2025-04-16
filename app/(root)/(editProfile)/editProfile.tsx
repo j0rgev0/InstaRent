@@ -30,18 +30,38 @@ const EdituserPage = () => {
   const [username, setUsername] = useState(session?.user.username || '');
 
   const showImageOptions = () => {
-    Alert.alert('Profile Image', 'What would you like to do?', [
-      {
-        text: 'Change Image',
-        onPress: () => selectImage(),
-        style: 'default',
-      },
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'destructive',
-      },
-    ]);
+    if (session?.user.image) {
+      Alert.alert('Profile Image', 'What would you like to do?', [
+        {
+          text: 'Change Image',
+          onPress: () => selectImage(),
+          style: 'default',
+        },
+        {
+          text: 'Delete Image',
+          onPress: () => authClient.updateUser({ image: null }),
+          style: 'default',
+        },
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+      ]);
+    } else {
+      Alert.alert('Profile Image', 'What would you like to do?', [
+        {
+          text: 'Change Image',
+          onPress: () => selectImage(),
+          style: 'default',
+        },
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+      ]);
+    }
   };
 
   const selectImage = async () => {
@@ -176,7 +196,7 @@ const EdituserPage = () => {
     <ScrollView className="bg-white">
       <View className="items-center border-b border-gray-200 bg-white p-5">
         <TouchableOpacity
-          className="mb-4 h-24 w-24 items-center justify-center rounded-full bg-gray-100"
+          className="mb-4 h-24 w-24 items-center justify-center rounded-full"
           onPress={() => {
             if (Platform.OS === 'web') {
               selectImage();
@@ -190,7 +210,7 @@ const EdituserPage = () => {
               className="h-full w-full rounded-full"
             />
           ) : (
-            <Ionicons name="person-circle" size={100} className="text-darkBlue" />
+            <Ionicons name="person-circle" size={90} className="text-darkBlue" />
           )}
         </TouchableOpacity>
         <Text
@@ -215,6 +235,7 @@ const EdituserPage = () => {
           value={username}
           onChangeText={setUsername}
         />
+
         <InputTextField
           editable={!loading}
           subtitle="Name"
@@ -234,7 +255,11 @@ const EdituserPage = () => {
           <Text className="text-lg text-blue-500">Verify Email</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="px-2 pb-2" onPress={() => {}}>
+        <TouchableOpacity
+          className="px-2 pb-2"
+          onPress={() => {
+            authClient.signOut().then(() => router.replace('/'));
+          }}>
           <Text className="text-lg text-red-500">Logout</Text>
         </TouchableOpacity>
 
@@ -245,7 +270,6 @@ const EdituserPage = () => {
         <TouchableOpacity className="rounded-md bg-darkBlue p-4" onPress={handleSave}>
           <Text className="text-center text-lg text-white">Save</Text>
         </TouchableOpacity>
-
       </View>
     </ScrollView>
   );
