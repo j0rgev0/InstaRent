@@ -42,7 +42,7 @@ const EdituserPage = () => {
         style: 'destructive',
       },
     ]);
-  };
+  }
 
   const selectImage = async () => {
     try {
@@ -140,7 +140,22 @@ const EdituserPage = () => {
     } catch (error) {
       console.error('Error picking image:', error);
     }
-  };
+  }
+
+  const verifyEmail = async () => {
+    try {
+      if (session?.user.emailVerified) throw new Error("Email already verified");
+
+      await authClient.sendVerificationEmail({
+        email: email,
+        callbackURL: "/",
+      })
+      Alert.alert('Email Verification', 'Verification email sent to: ' + email)
+    } catch (e) {
+      console.error('Error sending verification email:', e)
+      Alert.alert('Error', '' + e)
+    }
+  }
 
   const handleSave = async () => {
     try {
@@ -155,7 +170,7 @@ const EdituserPage = () => {
       console.error('Error updating profile:', error)
       alert('Failed to update profile. Please try again.')
     }
-  };
+  }
 
   return (
     <ScrollView className="bg-white">
@@ -212,13 +227,7 @@ const EdituserPage = () => {
       <View className="p-5">
         <TouchableOpacity
           className="p-4"
-          onPress={() => {
-            authClient.sendVerificationEmail({
-              email: email,
-              callbackURL: "/",
-            })
-            alert('Verification email sent to: ' + email)
-          }}>
+          onPress={verifyEmail}>
           <Text className="text-center text-lg text-blue-500">Verify Email</Text>
         </TouchableOpacity>
         <TouchableOpacity
