@@ -4,7 +4,7 @@ import { Link } from 'expo-router';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { authClient } from '@/lib/auth-client';
-import { View, Text, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Keyboard, Alert, Platform } from 'react-native';
 
 import '@/global.css';
 
@@ -37,7 +37,9 @@ export default function SignInPage() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <TouchableWithoutFeedback
+      onPress={Platform.OS !== 'web' ? Keyboard.dismiss : undefined}
+      accessible={false}>
       <View className="flex-1 justify-center bg-white">
         <View className="px-6 py-8">
           <View className="mb-5 items-center">
@@ -87,5 +89,5 @@ export default function SignInPage() {
         </View>
       </View>
     </TouchableWithoutFeedback>
-  )
+  );
 }

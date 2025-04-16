@@ -7,27 +7,27 @@ import {
   Image,
   Alert,
   TextInput,
-  Button
+  Button,
 } from 'react-native';
-import { authClient } from '@/lib/auth-client'
-import React, { useState } from 'react'
-import * as ImagePicker from 'expo-image-picker'
-import { Ionicons } from '@expo/vector-icons'
-import { CLOUDINARY_CLOUD_NAME } from '@/utils/constants'
+import { authClient } from '@/lib/auth-client';
+import React, { useState } from 'react';
+import * as ImagePicker from 'expo-image-picker';
+import { Ionicons } from '@expo/vector-icons';
+import { CLOUDINARY_CLOUD_NAME } from '@/utils/constants';
 
 import '@/global.css';
-import InputTextField from '@/components/InputTextField'
-import { router } from 'expo-router'
+import InputTextField from '@/components/InputTextField';
+import { router } from 'expo-router';
 
 const EdituserPage = () => {
-  const { data: session } = authClient.useSession()
+  const { data: session } = authClient.useSession();
 
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined)
-  const [loading, setLoading] = useState<boolean>(false)
-  const [name, setName] = useState(session?.user.name || '')
-  const [email, setEmail] = useState(session?.user.email || '')
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [name, setName] = useState(session?.user.name || '');
+  const [email, setEmail] = useState(session?.user.email || '');
   // @ts-ignore
-  const [username, setUsername] = useState(session?.user.username || '')
+  const [username, setUsername] = useState(session?.user.username || '');
 
   const showImageOptions = () => {
     Alert.alert('Profile Image', 'What would you like to do?', [
@@ -42,7 +42,7 @@ const EdituserPage = () => {
         style: 'destructive',
       },
     ]);
-  }
+  };
 
   const selectImage = async () => {
     try {
@@ -140,22 +140,22 @@ const EdituserPage = () => {
     } catch (error) {
       console.error('Error picking image:', error);
     }
-  }
+  };
 
   const verifyEmail = async () => {
     try {
-      if (session?.user.emailVerified) throw new Error("Email already verified");
+      if (session?.user.emailVerified) throw new Error('Email already verified');
 
       await authClient.sendVerificationEmail({
         email: email,
-        callbackURL: "/",
-      })
-      Alert.alert('Email Verification', 'Verification email sent to: ' + email)
+        callbackURL: '/',
+      });
+      Alert.alert('Email Verification', 'Verification email sent to: ' + email);
     } catch (e) {
-      console.error('Error sending verification email:', e)
-      Alert.alert('Error', '' + e)
+      console.error('Error sending verification email:', e);
+      Alert.alert('Error', '' + e);
     }
-  }
+  };
 
   const handleSave = async () => {
     try {
@@ -164,13 +164,13 @@ const EdituserPage = () => {
         // @ts-ignore
         username: username,
       });
-      alert('Profile updated successfully 🎉')
-      router.back()
+      alert('Profile updated successfully 🎉');
+      router.back();
     } catch (error) {
-      console.error('Error updating profile:', error)
-      alert('Failed to update profile. Please try again.')
+      console.error('Error updating profile:', error);
+      alert('Failed to update profile. Please try again.');
     }
-  }
+  };
 
   return (
     <ScrollView className="bg-white">
@@ -224,21 +224,31 @@ const EdituserPage = () => {
           onChangeText={setName}
         />
       </View>
+
       <View className="space-y-4 p-5">
-        <TouchableOpacity
-          className="p-4"
-          onPress={verifyEmail}>
+        <TouchableOpacity className="px-2 pb-2" onPress={() => {}}>
+          <Text className="text-lg text-blue-500">Change Password</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity className="px-2 pb-2" onPress={verifyEmail}>
           <Text className="text-lg text-blue-500">Verify Email</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          className="rounded-md bg-darkBlue p-4"
-          onPress={handleSave}>
+        <TouchableOpacity className="px-2 pb-2" onPress={() => {}}>
+          <Text className="text-lg text-red-500">Logout</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity className="px-2 pb-2" onPress={() => {}}>
+          <Text className="text-lg text-red-500">Delete Account</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity className="rounded-md bg-darkBlue p-4" onPress={handleSave}>
           <Text className="text-center text-lg text-white">Save</Text>
         </TouchableOpacity>
+
       </View>
     </ScrollView>
-  )
+  );
 };
 
 export default EdituserPage;
