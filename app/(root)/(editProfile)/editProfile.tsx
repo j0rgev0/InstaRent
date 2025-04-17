@@ -6,22 +6,27 @@ import {
   View,
   Image,
   Alert,
+  StyleSheet,
   TextInput,
   Button,
 } from 'react-native';
-import { authClient } from '@/lib/auth-client';
-import React, { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { Link, router } from 'expo-router';
+import Modal from 'react-native-modal';
+
 import { CLOUDINARY_CLOUD_NAME } from '@/utils/constants';
+import InputTextField from '@/components/InputTextField';
+import { authClient } from '@/lib/auth-client';
+import { Ionicons } from '@expo/vector-icons';
+import { auth } from '@/lib/server/auth';
 
 import '@/global.css';
-import InputTextField from '@/components/InputTextField';
-import { router } from 'expo-router';
 
 const EdituserPage = () => {
   const { data: session } = authClient.useSession();
 
+  const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [name, setName] = useState(session?.user.name || '');
@@ -62,7 +67,7 @@ const EdituserPage = () => {
         },
       ]);
     }
-  };
+  }
 
   const selectImage = async () => {
     try {
@@ -160,11 +165,11 @@ const EdituserPage = () => {
     } catch (error) {
       console.error('Error picking image:', error);
     }
-  };
+  }
 
   const verifyEmail = async () => {
     try {
-      if (session?.user.emailVerified) throw new Error('Email already verified');
+      if (session?.user.emailVerified) return Alert.alert('Error','Email already verified');
 
       await authClient.sendVerificationEmail({
         email: email,
@@ -175,7 +180,7 @@ const EdituserPage = () => {
       console.error('Error sending verification email:', e);
       Alert.alert('Error', '' + e);
     }
-  };
+  }
 
   const handleSave = async () => {
     try {
@@ -210,7 +215,7 @@ const EdituserPage = () => {
               className="h-full w-full rounded-full"
             />
           ) : (
-            <Ionicons name="person-circle" size={90} className="text-darkBlue" />
+            <Ionicons name="person-circle" size={90} color="#353949" />
           )}
         </TouchableOpacity>
         <Text
@@ -247,7 +252,7 @@ const EdituserPage = () => {
       </View>
 
       <View className="space-y-4 p-5">
-        <TouchableOpacity className="px-2 pb-2" onPress={() => {}}>
+        <TouchableOpacity className="px-2 pb-2" onPress={() => router.push('/changePassword')}>
           <Text className="text-lg text-blue-500">Change Password</Text>
         </TouchableOpacity>
 

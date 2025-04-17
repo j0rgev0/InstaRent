@@ -174,7 +174,7 @@ const ProfilePage = () => {
               router.push('/(root)/(editProfile)/editProfile');
             }}
             activeOpacity={0.8}>
-            <Ionicons name="menu" size={32} className="text-darkBlue" />
+            <Ionicons name="menu" size={32} color="#353949" />
           </TouchableOpacity>
         </View>
 
@@ -194,7 +194,7 @@ const ProfilePage = () => {
                 className="h-full w-full rounded-full"
               />
             ) : (
-              <Ionicons name="person-circle" size={100} className="text-darkBlue" />
+              <Ionicons name="person-circle" size={100} color="#353949" />
             )}
           </TouchableOpacity>
           <Text className="mb-2 text-2xl font-bold text-gray-800">{session?.user.name}</Text>

@@ -15,7 +15,7 @@ export default function RootLayout() {
         options={{
           headerTitle: 'Edit profile',
           headerTitleAlign: 'center',
-          headerShown: true,
+          headerShown: false,
         }}
       />
     </Stack>
