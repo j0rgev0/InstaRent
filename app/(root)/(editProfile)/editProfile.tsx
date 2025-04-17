@@ -13,13 +13,13 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Link, router } from 'expo-router';
-import Modal from 'react-native-modal';
+
 
 import { CLOUDINARY_CLOUD_NAME } from '@/utils/constants';
 import InputTextField from '@/components/InputTextField';
 import { authClient } from '@/lib/auth-client';
 import { Ionicons } from '@expo/vector-icons';
-import { auth } from '@/lib/server/auth';
+
 
 import '@/global.css';
 
