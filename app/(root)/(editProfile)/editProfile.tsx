@@ -194,13 +194,13 @@ const EdituserPage = () => {
       }
 
       if (Object.keys(updateData).length === 0) {
-        Alert.alert('Error','No changes made');
+        Alert.alert('Error', 'No changes made');
         return;
       }
 
       await authClient.updateUser(updateData);
 
-      Alert.alert('Profile updated','Profile updated successfully 🎉');
+      Alert.alert('Profile updated', 'Profile updated successfully');
       router.back();
     } catch (error) {
       console.error('Error updating profile:', error);
