@@ -18,7 +18,7 @@ const Button = ({ title, loadingTitle = title, loading = false, onPress }: Butto
       {loading && <ActivityIndicator color={'white'} />}
       <Text className="text-lg font-bold text-white">{loading ? loadingTitle : title}</Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 export default Button;

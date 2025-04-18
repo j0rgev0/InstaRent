@@ -1,30 +1,13 @@
 import Button from '@/components/Button';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ActivityIndicator, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
-import { authClient } from '@/lib/auth-client';
+import { Text, View } from 'react-native';
+import React from 'react';
 
 import '@/global.css';
 
 const IndexPage = () => {
   const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
-
-  useEffect(() => {
-    if (session) {
-      router.replace('/profile');
-    }
-  }, [session]);
-
-  if (isPending) {
-    return (
-      <SafeAreaView className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator />
-      </SafeAreaView>
-    );
-  }
-
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 p-6">

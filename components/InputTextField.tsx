@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { View, TextInput, Text, TouchableOpacity, KeyboardType } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import React, { useState } from 'react';
+import { View, TextInput, Text, TouchableOpacity, KeyboardType } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 interface InputTextFieldProps {
   subtitle?: string;
@@ -47,7 +47,7 @@ const InputTextField = ({
         )}
       </View>
     </View>
-  )
-}
+  );
+};
 
 export default InputTextField;

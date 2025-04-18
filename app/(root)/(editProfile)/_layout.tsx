@@ -34,7 +34,7 @@ export default function RootLayout() {
           headerTitle: 'Change Password',
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
-              <Text className="text-lg text-blue-500">Cancel</Text>
+              <Text className="text-lg text-blue-500 px-4">Cancel</Text>
             </TouchableOpacity>
           ),
         }}

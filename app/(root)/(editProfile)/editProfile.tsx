@@ -274,7 +274,7 @@ const EdituserPage = () => {
         <TouchableOpacity
           className="px-2 pb-2"
           onPress={() => {
-            authClient.signOut().then(() => router.replace('/'));
+            authClient.signOut();
           }}>
           <Text className="text-lg text-red-500">Logout</Text>
         </TouchableOpacity>

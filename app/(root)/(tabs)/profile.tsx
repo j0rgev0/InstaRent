@@ -146,74 +146,52 @@ const ProfilePage = () => {
     }
   };
 
-  if (!session) {
-    return (
-      <View className="flex-1 bg-gray-50 pt-10">
-        <View className="items-center border-b border-gray-200 bg-white p-5">
-          <View className="mb-4 h-32 w-32 items-center justify-center rounded-full bg-gray-100">
+  return (
+    <View className="flex-1 bg-gray-50 pt-10">
+      <View className="flex-row justify-end bg-white px-4 pt-4">
+        <TouchableOpacity
+          onPress={() => {
+            router.push('/(root)/(editProfile)/editProfile');
+          }}
+          activeOpacity={0.8}>
+          <Ionicons name="menu" size={32} color="#353949" />
+        </TouchableOpacity>
+      </View>
+
+      <View className="items-center border-b border-gray-200 bg-white p-5">
+        <TouchableOpacity
+          className="mb-4 h-32 w-32 items-center justify-center rounded-full bg-gray-100"
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              selectImage();
+            } else {
+              showImageOptions();
+            }
+          }}>
+          {session?.user.image ? (
+            <Image
+              source={{ uri: session?.user.image as string }}
+              className="h-full w-full rounded-full"
+            />
+          ) : (
             <Ionicons name="person-circle" size={100} color="#353949" />
-          </View>
-        </View>
-
-        <View className="flex-1 p-5">
-          <TouchableOpacity
-            className="mt-5 flex-row items-center justify-center rounded-lg bg-darkBlue p-4"
-            onPress={() => router.replace('/')}>
-            <Ionicons name="log-in-outline" size={24} color="white" />
-            <Text className="ml-2 text-base font-semibold text-white">Log In</Text>
-          </TouchableOpacity>
-        </View>
+          )}
+        </TouchableOpacity>
+        <Text className="mb-2 text-2xl font-bold text-gray-800">{session?.user.name}</Text>
+        {/* @ts-ignore */}
+        <Text className="text-base text-gray-600">{session.user.username}</Text>
       </View>
-    );
-  } else {
-    return (
-      <View className="flex-1 bg-gray-50 pt-10">
-        <View className="flex-row justify-end bg-white px-4 pt-4">
-          <TouchableOpacity
-            onPress={() => {
-              router.push('/(root)/(editProfile)/editProfile');
-            }}
-            activeOpacity={0.8}>
-            <Ionicons name="menu" size={32} color="#353949" />
-          </TouchableOpacity>
-        </View>
 
-        <View className="items-center border-b border-gray-200 bg-white p-5">
-          <TouchableOpacity
-            className="mb-4 h-32 w-32 items-center justify-center rounded-full bg-gray-100"
-            onPress={() => {
-              if (Platform.OS === 'web') {
-                selectImage();
-              } else {
-                showImageOptions();
-              }
-            }}>
-            {session?.user.image ? (
-              <Image
-                source={{ uri: session?.user.image as string }}
-                className="h-full w-full rounded-full"
-              />
-            ) : (
-              <Ionicons name="person-circle" size={100} color="#353949" />
-            )}
-          </TouchableOpacity>
-          <Text className="mb-2 text-2xl font-bold text-gray-800">{session?.user.name}</Text>
-          {/* @ts-ignore */}
-          <Text className="text-base text-gray-600">{session?.user.username}</Text>
-        </View>
-
-        <View className="flex-1 p-5">
-          <TouchableOpacity
-            className="mt-5 flex-row items-center justify-center rounded-lg bg-darkBlue p-4"
-            onPress={() => authClient.signOut().then(() => router.replace('/'))}>
-            <Ionicons name="log-out-outline" size={24} color="white" />
-            <Text className="ml-2 text-base font-semibold text-white">Sign Out</Text>
-          </TouchableOpacity>
-        </View>
+      <View className="flex-1 p-5">
+        <TouchableOpacity
+          className="mt-5 flex-row items-center justify-center rounded-lg bg-darkBlue p-4"
+          onPress={() => authClient.signOut()}>
+          <Ionicons name="log-out-outline" size={24} color="white" />
+          <Text className="ml-2 text-base font-semibold text-white">Sign Out</Text>
+        </TouchableOpacity>
       </View>
-      
-    )
-  }
-}
+    </View>
+  );
+};
 
 export default ProfilePage;

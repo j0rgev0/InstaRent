@@ -1,6 +1,11 @@
-import { router, Stack } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
+import { authClient } from '@/lib/auth-client';
+import React from 'react';
 
 export default function RootLayout() {
+  const { data: session} = authClient.useSession();
+  if (!session) return <Redirect href={'/'} />;
+
   return (
     <Stack>
       <Stack.Screen
