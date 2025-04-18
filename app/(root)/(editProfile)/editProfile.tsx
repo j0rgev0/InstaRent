@@ -266,6 +266,9 @@ const EdituserPage = () => {
         <TouchableOpacity className="px-2 pb-2" onPress={() => router.push('/changePassword')}>
           <Text className="text-lg text-blue-500">Change Password</Text>
         </TouchableOpacity>
+        <TouchableOpacity className="px-2 pb-2" onPress={() => router.push('/changeEmail')}>
+          <Text className="text-lg text-blue-500">Change Email</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity className="px-2 pb-2" onPress={verifyEmail}>
           <Text className="text-lg text-blue-500">Verify Email</Text>

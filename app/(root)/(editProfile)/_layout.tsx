@@ -39,6 +39,20 @@ export default function RootLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="changeEmail"
+        options={{
+          headerShown: true,
+          presentation: 'modal',
+          headerTitleAlign: 'center',
+          headerTitle: 'Change Email',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.back()}>
+              <Text className="text-lg text-blue-500 px-4">Cancel</Text>
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack>
   );
 }
