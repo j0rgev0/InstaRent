@@ -14,12 +14,10 @@ import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Link, router } from 'expo-router';
 
-
 import { CLOUDINARY_CLOUD_NAME } from '@/utils/constants';
 import InputTextField from '@/components/InputTextField';
 import { authClient } from '@/lib/auth-client';
 import { Ionicons } from '@expo/vector-icons';
-
 
 import '@/global.css';
 
@@ -67,7 +65,7 @@ const EdituserPage = () => {
         },
       ]);
     }
-  }
+  };
 
   const selectImage = async () => {
     try {
@@ -165,11 +163,11 @@ const EdituserPage = () => {
     } catch (error) {
       console.error('Error picking image:', error);
     }
-  }
+  };
 
   const verifyEmail = async () => {
     try {
-      if (session?.user.emailVerified) return Alert.alert('Error','Email already verified');
+      if (session?.user.emailVerified) return Alert.alert('Error', 'Email already verified');
 
       await authClient.sendVerificationEmail({
         email: email,
@@ -180,16 +178,29 @@ const EdituserPage = () => {
       console.error('Error sending verification email:', e);
       Alert.alert('Error', '' + e);
     }
-  }
+  };
 
   const handleSave = async () => {
     try {
-      await authClient.updateUser({
-        name: name,
-        // @ts-ignore
-        username: username,
-      });
-      alert('Profile updated successfully 🎉');
+      const updateData: any = {};
+
+      if (name !== session?.user.name) {
+        updateData.name = name;
+      }
+
+      // @ts-ignore
+      if (username !== session?.user.username && username.trim() !== '') {
+        updateData.username = username;
+      }
+
+      if (Object.keys(updateData).length === 0) {
+        Alert.alert('Error','No changes made');
+        return;
+      }
+
+      await authClient.updateUser(updateData);
+
+      Alert.alert('Profile updated','Profile updated successfully 🎉');
       router.back();
     } catch (error) {
       console.error('Error updating profile:', error);
