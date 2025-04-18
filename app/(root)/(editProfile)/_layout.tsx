@@ -1,11 +1,13 @@
-
 import { Ionicons } from '@expo/vector-icons';
 import { router, Stack } from 'expo-router';
 import { TouchableOpacity, Text } from 'react-native';
+import { authClient } from '@/lib/auth-client';
 
-import '@/global.css'
+import '@/global.css';
 
 export default function RootLayout() {
+  const { data: session } = authClient.useSession();
+
   return (
     <Stack>
       <Stack.Screen
@@ -16,10 +18,11 @@ export default function RootLayout() {
           headerTitleAlign: 'center',
           headerTitle: 'Edit profile',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => router.back()}>
+            <TouchableOpacity onPress={() => router.back()} className="flex flex-row items-center w-16 h-8">
               <Ionicons name="chevron-back-sharp" size={32} color={'black'} />
+              <Text className="text-lg text-black">{session?.user.name}</Text>
             </TouchableOpacity>
-          )
+          ),
         }}
       />
       <Stack.Screen
@@ -31,9 +34,9 @@ export default function RootLayout() {
           headerTitle: 'Change Password',
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
-              <Text className="text-blue-500 text-lg">Cancel</Text>
+              <Text className="text-lg text-blue-500">Cancel</Text>
             </TouchableOpacity>
-          )
+          ),
         }}
       />
     </Stack>
