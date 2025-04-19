@@ -1,25 +1,25 @@
-import { authClient } from '@/lib/auth-client';
-import React, { useEffect } from 'react';
-import { Stack, useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, SafeAreaView, View } from 'react-native';
+import { authClient } from '@/lib/auth-client'
+import React, { useEffect } from 'react'
+import { Stack, useRouter } from 'expo-router'
+import { StatusBar } from 'expo-status-bar'
+import { ActivityIndicator, SafeAreaView, View } from 'react-native'
 
 export default function AppLayout() {
-  const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
+  const router = useRouter()
+  const { data: session, isPending } = authClient.useSession()
 
   useEffect(() => {
     if (session) {
-      router.replace('/profile');
+      router.replace('/profile')
     }
-  }, [session]);
+  }, [session])
 
   if (isPending) {
     return (
       <SafeAreaView className="flex-1 items-center justify-center bg-white">
         <ActivityIndicator />
       </SafeAreaView>
-    );
+    )
   }
 
   return (
@@ -36,16 +36,16 @@ export default function AppLayout() {
         <Stack.Screen
           name="(auth)"
           options={{
-            headerShown: false,
+            headerShown: false
           }}
         />
         <Stack.Screen
           name="(root)"
           options={{
-            headerShown: false,
+            headerShown: false
           }}
         />
       </Stack>
     </View>
-  );
+  )
 }

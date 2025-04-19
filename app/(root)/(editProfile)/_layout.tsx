@@ -1,12 +1,12 @@
-import { Ionicons } from '@expo/vector-icons';
-import { router, Stack } from 'expo-router';
-import { TouchableOpacity, Text } from 'react-native';
-import { authClient } from '@/lib/auth-client';
+import { Ionicons } from '@expo/vector-icons'
+import { router, Stack } from 'expo-router'
+import { TouchableOpacity, Text } from 'react-native'
+import { authClient } from '@/lib/auth-client'
 
-import '@/global.css';
+import '@/global.css'
 
 export default function RootLayout() {
-  const { data: session } = authClient.useSession();
+  const { data: session } = authClient.useSession()
 
   return (
     <Stack>
@@ -18,11 +18,13 @@ export default function RootLayout() {
           headerTitleAlign: 'center',
           headerTitle: 'Edit profile',
           headerLeft: () => (
-            <TouchableOpacity onPress={() => router.back()} className="flex flex-row items-center w-16 h-8">
+            <TouchableOpacity
+              onPress={() => router.back()}
+              className="flex h-8 w-16 flex-row items-center">
               <Ionicons name="chevron-back-sharp" size={32} color={'black'} />
               <Text className="text-lg text-black">{session?.user.name}</Text>
             </TouchableOpacity>
-          ),
+          )
         }}
       />
       <Stack.Screen
@@ -34,9 +36,9 @@ export default function RootLayout() {
           headerTitle: 'Change Password',
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
-              <Text className="text-lg text-blue-500 px-4">Cancel</Text>
+              <Text className="px-4 text-lg text-blue-500">Cancel</Text>
             </TouchableOpacity>
-          ),
+          )
         }}
       />
       <Stack.Screen
@@ -48,11 +50,11 @@ export default function RootLayout() {
           headerTitle: 'Change Email',
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
-              <Text className="text-lg text-blue-500 px-4">Cancel</Text>
+              <Text className="px-4 text-lg text-blue-500">Cancel</Text>
             </TouchableOpacity>
-          ),
+          )
         }}
       />
     </Stack>
-  );
+  )
 }

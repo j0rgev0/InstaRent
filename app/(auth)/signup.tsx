@@ -1,54 +1,54 @@
-import Button from '@/components/Button';
-import InputTextField from '@/components/InputTextField';
-import { Link } from 'expo-router';
-import { useState } from 'react';
-import { useRouter } from 'expo-router';
-import { authClient } from '@/lib/auth-client';
-import { View, Text, TouchableWithoutFeedback, Keyboard, Alert, Platform } from 'react-native';
+import Button from '@/components/Button'
+import InputTextField from '@/components/InputTextField'
+import { Link } from 'expo-router'
+import { useState } from 'react'
+import { useRouter } from 'expo-router'
+import { authClient } from '@/lib/auth-client'
+import { View, Text, TouchableWithoutFeedback, Keyboard, Alert, Platform } from 'react-native'
 
-import '@/global.css';
+import '@/global.css'
 
 export default function SignUpPage() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [showError, setShowError] = useState(false);
-  const [email, setEmail] = useState<string>('');
-  const [username, setUsername] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState('')
+  const [showError, setShowError] = useState(false)
+  const [email, setEmail] = useState<string>('')
+  const [username, setUsername] = useState<string>('')
+  const [name, setName] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleSignUp = async () => {
-    setLoading(true);
+    setLoading(true)
     const res = await authClient.signUp.email(
       {
         email,
         password,
         name,
         // @ts-ignore
-        username,
+        username
       },
       {
         onError: (ctx) => {
-          setShowError(true);
-          setErrorMessage('Error: ' + ctx.error.message);
-          Alert.alert('Error', ctx.error.message);
-          console.log(ctx);
+          setShowError(true)
+          setErrorMessage('Error: ' + ctx.error.message)
+          Alert.alert('Error', ctx.error.message)
+          console.log(ctx)
         },
         onSuccess: () => {
           Alert.alert('Account created', 'Successfully created an account', [
             {
               text: 'Continue',
-              onPress: () => router.replace('/(root)/(tabs)/profile'),
-            },
-          ]);
-        },
+              onPress: () => router.replace('/(root)/(tabs)/profile')
+            }
+          ])
+        }
       }
-    );
-    console.log(res);
-    setLoading(false);
-  };
+    )
+    console.log(res)
+    setLoading(false)
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -125,5 +125,5 @@ export default function SignUpPage() {
         </View>
       </View>
     </TouchableWithoutFeedback>
-  );
+  )
 }

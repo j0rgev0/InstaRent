@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity, KeyboardType } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react'
+import { View, TextInput, Text, TouchableOpacity, KeyboardType } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
 interface InputTextFieldProps {
-  subtitle?: string;
-  iconName?: keyof typeof Ionicons.glyphMap;
-  placeholder: string;
-  value: string;
-  onChangeText: (text: string) => void;
-  secureTextEntry?: boolean;
-  editable?: boolean;
-  keyboardType?: KeyboardType;
+  subtitle?: string
+  iconName?: keyof typeof Ionicons.glyphMap
+  placeholder: string
+  value: string
+  onChangeText: (text: string) => void
+  secureTextEntry?: boolean
+  editable?: boolean
+  keyboardType?: KeyboardType
 }
 
 const InputTextField = ({
@@ -21,9 +21,9 @@ const InputTextField = ({
   onChangeText,
   secureTextEntry = false,
   editable = true,
-  keyboardType = 'default',
+  keyboardType = 'default'
 }: InputTextFieldProps) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
   return (
     <View className="gap-2">
@@ -47,7 +47,7 @@ const InputTextField = ({
         )}
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default InputTextField;
+export default InputTextField

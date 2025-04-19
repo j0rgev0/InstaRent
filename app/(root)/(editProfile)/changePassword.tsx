@@ -5,59 +5,59 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import React, { useState } from 'react';
-import { authClient } from '@/lib/auth-client';
+  View
+} from 'react-native'
+import React, { useState } from 'react'
+import { authClient } from '@/lib/auth-client'
 
-import InputTextField from '@/components/InputTextField';
-import '@/global.css';
-import { router } from 'expo-router';
+import InputTextField from '@/components/InputTextField'
+import '@/global.css'
+import { router } from 'expo-router'
 
 const changePasswordPage = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [showError, setShowError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('')
+  const [showError, setShowError] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmNewPassword, setConfirmNewPassword] = useState('')
 
   const handleSave = async () => {
     try {
-      setLoading(true);
-      setShowError(false);
-      setErrorMessage('');
+      setLoading(true)
+      setShowError(false)
+      setErrorMessage('')
 
       if (!currentPassword || !newPassword || !confirmNewPassword)
-        throw new Error('All fields are required');
+        throw new Error('All fields are required')
 
-      if (newPassword !== confirmNewPassword) throw new Error('Passwords do not match');
+      if (newPassword !== confirmNewPassword) throw new Error('Passwords do not match')
 
       if (newPassword === currentPassword)
-        throw new Error('The new password has to be different from the old password');
+        throw new Error('The new password has to be different from the old password')
 
       if (newPassword === confirmNewPassword) {
         const result = await authClient.changePassword({
           newPassword: newPassword,
           currentPassword: currentPassword,
-          revokeOtherSessions: true,
-        });
+          revokeOtherSessions: true
+        })
 
-        if (result.error) throw new Error(result.error.message);
+        if (result.error) throw new Error(result.error.message)
 
-        Alert.alert('Success', 'password changed');
+        Alert.alert('Success', 'password changed')
 
-        router.back();
-      } else throw new Error('Password not match');
+        router.back()
+      } else throw new Error('Password not match')
     } catch (e) {
-      console.log('Error saving new password: ' + e);
-      Alert.alert('Error', '' + e);
-      setShowError(true);
-      setErrorMessage('' + e);
+      console.log('Error saving new password: ' + e)
+      Alert.alert('Error', '' + e)
+      setShowError(true)
+      setErrorMessage('' + e)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -104,7 +104,7 @@ const changePasswordPage = () => {
         </View>
       </View>
     </TouchableWithoutFeedback>
-  );
-};
+  )
+}
 
-export default changePasswordPage;
+export default changePasswordPage

@@ -1,5 +1,5 @@
-import { ScrollViewStyleReset } from 'expo-router/html';
-import { type PropsWithChildren } from 'react';
+import { ScrollViewStyleReset } from 'expo-router/html'
+import { type PropsWithChildren } from 'react'
 
 // This file is web-only and used to configure the root HTML for every
 // web page during static rendering.
@@ -22,7 +22,7 @@ export default function Root({ children }: PropsWithChildren) {
           <style
             id="expo-reset"
             dangerouslySetInnerHTML={{
-              __html: `body,html{height:100%}#root{min-height:100%;display:flex}`,
+              __html: `body,html{height:100%}#root{min-height:100%;display:flex}`
             }}
           />
         }
@@ -31,5 +31,5 @@ export default function Root({ children }: PropsWithChildren) {
       </head>
       <body>{children}</body>
     </html>
-  );
+  )
 }

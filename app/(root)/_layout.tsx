@@ -1,10 +1,10 @@
-import { Redirect, Stack } from 'expo-router';
-import { authClient } from '@/lib/auth-client';
-import React from 'react';
+import { Redirect, Stack } from 'expo-router'
+import { authClient } from '@/lib/auth-client'
+import React from 'react'
 
 export default function RootLayout() {
-  const { data: session} = authClient.useSession();
-  if (!session) return <Redirect href={'/'} />;
+  const { data: session } = authClient.useSession()
+  if (!session) return <Redirect href={'/'} />
 
   return (
     <Stack>
@@ -12,7 +12,7 @@ export default function RootLayout() {
         name="(tabs)"
         options={{
           headerTitle: '',
-          headerShown: false,
+          headerShown: false
         }}
       />
       <Stack.Screen
@@ -20,9 +20,9 @@ export default function RootLayout() {
         options={{
           headerTitle: 'Edit profile',
           headerTitleAlign: 'center',
-          headerShown: false,
+          headerShown: false
         }}
       />
     </Stack>
-  );
+  )
 }

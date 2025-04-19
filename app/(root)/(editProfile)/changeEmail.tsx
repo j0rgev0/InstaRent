@@ -5,46 +5,46 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import React, { useState } from 'react';
-import { authClient } from '@/lib/auth-client';
+  View
+} from 'react-native'
+import React, { useState } from 'react'
+import { authClient } from '@/lib/auth-client'
 
-import InputTextField from '@/components/InputTextField';
-import '@/global.css';
+import InputTextField from '@/components/InputTextField'
+import '@/global.css'
 
 const changeEmailPage = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [showError, setShowError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [newEmail, setNewEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('')
+  const [showError, setShowError] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [newEmail, setNewEmail] = useState('')
 
   const handleSave = async () => {
     try {
-      setLoading(true);
-      setShowError(false);
-      setErrorMessage('');
+      setLoading(true)
+      setShowError(false)
+      setErrorMessage('')
 
       if (!newEmail) {
-        throw new Error('Email is required');
+        throw new Error('Email is required')
       }
 
       const result = await authClient.changeEmail({
         newEmail: newEmail,
-        callbackURL: '/',
-      });
-      if (result.error) throw new Error(result.error.message);
+        callbackURL: '/'
+      })
+      if (result.error) throw new Error(result.error.message)
 
-      Alert.alert('Alert', 'Comfirm the email change in your old email inbox');
+      Alert.alert('Alert', 'Comfirm the email change in your old email inbox')
     } catch (e) {
-      console.log('Error updating email: ' + e);
-      Alert.alert('Error', '' + e);
-      setShowError(true);
-      setErrorMessage('' + e);
+      console.log('Error updating email: ' + e)
+      Alert.alert('Error', '' + e)
+      setShowError(true)
+      setErrorMessage('' + e)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -74,7 +74,7 @@ const changeEmailPage = () => {
         </View>
       </View>
     </TouchableWithoutFeedback>
-  );
-};
+  )
+}
 
-export default changeEmailPage;
+export default changeEmailPage

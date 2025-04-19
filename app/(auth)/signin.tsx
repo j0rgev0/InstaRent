@@ -1,44 +1,44 @@
-import Button from '@/components/Button';
-import InputTextField from '@/components/InputTextField';
-import { Link } from 'expo-router';
-import { useState } from 'react';
-import { useRouter } from 'expo-router';
-import { authClient } from '@/lib/auth-client';
-import { View, Text, TouchableWithoutFeedback, Keyboard, Alert, Platform } from 'react-native';
+import Button from '@/components/Button'
+import InputTextField from '@/components/InputTextField'
+import { Link } from 'expo-router'
+import { useState } from 'react'
+import { useRouter } from 'expo-router'
+import { authClient } from '@/lib/auth-client'
+import { View, Text, TouchableWithoutFeedback, Keyboard, Alert, Platform } from 'react-native'
 
-import '@/global.css';
+import '@/global.css'
 
 export default function SignInPage() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [showError, setShowError] = useState(false);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState('')
+  const [showError, setShowError] = useState(false)
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleSignIn = async () => {
-    setLoading(true);
+    setLoading(true)
     const res = await authClient.signIn.email(
       {
         email,
-        password,
+        password
       },
       {
         onError: (ctx) => {
-          setShowError(true);
-          setErrorMessage('Error: ' + ctx.error.message);
-          Alert.alert('Error', ctx.error.message);
-          console.log(ctx);
+          setShowError(true)
+          setErrorMessage('Error: ' + ctx.error.message)
+          Alert.alert('Error', ctx.error.message)
+          console.log(ctx)
         },
         onSuccess: () => {
-          router.replace('/(root)/(tabs)/profile');
-        },
+          router.replace('/(root)/(tabs)/profile')
+        }
       }
-    );
-    console.log(res);
-    setLoading(false);
-  };
+    )
+    console.log(res)
+    setLoading(false)
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -96,5 +96,5 @@ export default function SignInPage() {
         </View>
       </View>
     </TouchableWithoutFeedback>
-  );
+  )
 }

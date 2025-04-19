@@ -1,11 +1,11 @@
-import { Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import React from 'react';
+import { Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import React from 'react'
 
 interface ButtonProps {
-  title: string;
-  loadingTitle?: string;
-  loading?: boolean;
-  onPress: () => void;
+  title: string
+  loadingTitle?: string
+  loading?: boolean
+  onPress: () => void
 }
 
 const Button = ({ title, loadingTitle = title, loading = false, onPress }: ButtonProps) => {
@@ -18,7 +18,7 @@ const Button = ({ title, loadingTitle = title, loading = false, onPress }: Butto
       {loading && <ActivityIndicator color={'white'} />}
       <Text className="text-lg font-bold text-white">{loading ? loadingTitle : title}</Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

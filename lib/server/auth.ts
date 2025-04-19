@@ -1,10 +1,10 @@
-import { betterAuth } from 'better-auth';
-import { expo } from '@better-auth/expo';
-import { db } from '@/db';
-import { user, account, session, verification } from '@/db/schema';
-import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { username } from 'better-auth/plugins';
-import { resend } from '@/utils/resend';
+import { betterAuth } from 'better-auth'
+import { expo } from '@better-auth/expo'
+import { db } from '@/db'
+import { user, account, session, verification } from '@/db/schema'
+import { drizzleAdapter } from 'better-auth/adapters/drizzle'
+import { username } from 'better-auth/plugins'
+import { resend } from '@/utils/resend'
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -13,11 +13,11 @@ export const auth = betterAuth({
       user,
       account,
       session,
-      verification,
-    },
+      verification
+    }
   }),
   emailAndPassword: {
-    enabled: true,
+    enabled: true
   },
   emailVerification: {
     sendVerificationEmail: async ({ user, url, token }, request) => {
@@ -40,15 +40,15 @@ export const auth = betterAuth({
             <p>Welcome aboard!</p>
             <p><strong>The InstaRent Team</strong></p>
           </div>
-        `,
-        });
-        if (result.error) throw new Error(result.error.message);
+        `
+        })
+        if (result.error) throw new Error(result.error.message)
 
-        console.log('email send');
+        console.log('email send')
       } catch (e) {
-        console.log('Error sending email' + e);
+        console.log('Error sending email' + e)
       }
-    },
+    }
   },
   user: {
     changeEmail: {
@@ -74,16 +74,16 @@ export const auth = betterAuth({
               <p>Thank you for using InstaRent,</p>
               <p><strong>The InstaRent Team</strong></p>
             </div>
-          `,
-          });
-          if (result.error) throw new Error(result.error.message);
+          `
+          })
+          if (result.error) throw new Error(result.error.message)
 
-          console.log('email send');
+          console.log('email send')
         } catch (e) {
-          console.log('Error sending email' + e);
+          console.log('Error sending email' + e)
         }
-      },
-    },
+      }
+    }
   },
   plugins: [
     expo(),
@@ -92,15 +92,15 @@ export const auth = betterAuth({
       minUsernameLength: 2,
       usernameValidator: (username) => {
         if (username === 'admin') {
-          return false;
+          return false
         }
-        return true;
-      },
-    }),
+        return true
+      }
+    })
   ],
   trustedOrigins: ['myapp://', 'http://', 'exp://'],
   session: {
     expiresIn: 60 * 60 * 24 * 3, // 3 days
-    updateAge: 60 * 60 * 24, // 1 day (every 1 day the session expiration is updated)
-  },
-});
+    updateAge: 60 * 60 * 24 // 1 day (every 1 day the session expiration is updated)
+  }
+})

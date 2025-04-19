@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, integer } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, boolean, integer } from 'drizzle-orm/pg-core'
 
 export const user = pgTable('user', {
   id: text('id').primaryKey(),
@@ -9,8 +9,8 @@ export const user = pgTable('user', {
   image: text('image'),
   createdAt: timestamp('created_at').notNull(),
   updatedAt: timestamp('updated_at').notNull(),
-  displayUsername: text('display_username'),
-});
+  displayUsername: text('display_username')
+})
 
 export const session = pgTable('session', {
   id: text('id').primaryKey(),
@@ -22,8 +22,8 @@ export const session = pgTable('session', {
   userAgent: text('user_agent'),
   userId: text('user_id')
     .notNull()
-    .references(() => user.id, { onDelete: 'cascade' }),
-});
+    .references(() => user.id, { onDelete: 'cascade' })
+})
 
 export const account = pgTable('account', {
   id: text('id').primaryKey(),
@@ -40,8 +40,8 @@ export const account = pgTable('account', {
   scope: text('scope'),
   password: text('password'),
   createdAt: timestamp('created_at').notNull(),
-  updatedAt: timestamp('updated_at').notNull(),
-});
+  updatedAt: timestamp('updated_at').notNull()
+})
 
 export const verification = pgTable('verification', {
   id: text('id').primaryKey(),
@@ -49,5 +49,5 @@ export const verification = pgTable('verification', {
   value: text('value').notNull(),
   expiresAt: timestamp('expires_at').notNull(),
   createdAt: timestamp('created_at'),
-  updatedAt: timestamp('updated_at'),
-});
+  updatedAt: timestamp('updated_at')
+})

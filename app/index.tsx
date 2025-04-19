@@ -1,13 +1,13 @@
-import Button from '@/components/Button';
-import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, View } from 'react-native';
-import React from 'react';
+import Button from '@/components/Button'
+import { useRouter } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Text, View } from 'react-native'
+import React from 'react'
 
-import '@/global.css';
+import '@/global.css'
 
 const IndexPage = () => {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 p-6">
@@ -24,7 +24,7 @@ const IndexPage = () => {
         </View>
       </View>
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage
