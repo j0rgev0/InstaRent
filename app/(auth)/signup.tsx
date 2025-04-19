@@ -11,6 +11,8 @@ import '@/global.css';
 export default function SignUpPage() {
   const router = useRouter();
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   const [email, setEmail] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [name, setName] = useState<string>('');
@@ -29,6 +31,8 @@ export default function SignUpPage() {
       },
       {
         onError: (ctx) => {
+          setShowError(true);
+          setErrorMessage('Error: ' + ctx.error.message);
           Alert.alert('Error', ctx.error.message);
           console.log(ctx);
         },
@@ -105,6 +109,10 @@ export default function SignUpPage() {
               onPress={handleSignUp}
             />
           </View>
+
+          {Platform.OS === 'web' && showError && (
+            <Text className="pt-1 text-sm text-red-500">{errorMessage}</Text>
+          )}
 
           <View className="mt-6 flex-row justify-center">
             <Text className="text-gray-500">
