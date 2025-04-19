@@ -8,30 +8,43 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import { auth } from '@/lib/server/auth';
 import { authClient } from '@/lib/auth-client';
 
 import InputTextField from '@/components/InputTextField';
 import '@/global.css';
-import { router } from 'expo-router';
 
-const ChangePasswordPage = () => {
-  const { data: session } = authClient.useSession();
-
+const changeEmailPage = () => {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [newEmail, setNewEmail] = useState('');
 
   const handleSave = async () => {
     try {
-      await authClient.changeEmail({
+      setLoading(true);
+      setShowError(false);
+      setErrorMessage('');
+
+      if (!newEmail) {
+        throw new Error('Email is required');
+      }
+
+      const result = await authClient.changeEmail({
         newEmail: newEmail,
-        callbackURL: '/dashboard'
-      })
+        callbackURL: '/',
+      });
+      if (result.error) throw new Error(result.error.message);
+
+      Alert.alert('Alert', 'Comfirm the email change in your old email inbox');
     } catch (e) {
-      console.log('Error saving new password: ' + e)
-      Alert.alert('Error', '' + e)
+      console.log('Error updating email: ' + e);
+      Alert.alert('Error', '' + e);
+      setShowError(true);
+      setErrorMessage('' + e);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <TouchableWithoutFeedback
@@ -46,14 +59,22 @@ const ChangePasswordPage = () => {
           value={newEmail}
           onChangeText={setNewEmail}
         />
-      <View className="py-4">
-        <TouchableOpacity className="rounded-md bg-darkBlue p-4" onPress={handleSave}>
-          <Text className="text-center text-lg text-white">Save</Text>
-        </TouchableOpacity>
-      </View>
+        <View className="py-4">
+          <TouchableOpacity
+            className="rounded-md bg-darkBlue p-4"
+            disabled={loading}
+            onPress={handleSave}>
+            <Text className="text-center text-lg text-white">Save</Text>
+          </TouchableOpacity>
+          {Platform.OS === 'web' && showError ? (
+            <Text className="pt-1 text-sm text-red-500">{errorMessage}</Text>
+          ) : (
+            ''
+          )}
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
 };
 
-export default ChangePasswordPage;
+export default changeEmailPage;

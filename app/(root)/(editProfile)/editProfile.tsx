@@ -22,15 +22,14 @@ import { Ionicons } from '@expo/vector-icons';
 import '@/global.css';
 
 const EdituserPage = () => {
-  const { data: session } = authClient.useSession();
-
-  const [modalVisible, setModalVisible] = useState(false);
+  const { data: session } = authClient.useSession()
+  
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [name, setName] = useState(session?.user.name || '');
-  const [email, setEmail] = useState(session?.user.email || '');
+  const [loading, setLoading] = useState<boolean>(false)
+  const [name, setName] = useState(session?.user.name || '')
+  const [email, setEmail] = useState(session?.user.email || '')
   // @ts-ignore
-  const [username, setUsername] = useState(session?.user.username || '');
+  const [username, setUsername] = useState(session?.user.username || '')
 
   const showImageOptions = () => {
     if (session?.user.image) {
@@ -279,7 +278,7 @@ const EdituserPage = () => {
           onPress={() => {
             authClient.signOut();
           }}>
-          <Text className="text-lg text-red-500">Logout</Text>
+          <Text className="text-lg text-red-500">Sign out</Text>
         </TouchableOpacity>
 
         <TouchableOpacity className="px-2 pb-2" onPress={() => {}}>

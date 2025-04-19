@@ -8,16 +8,15 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import { auth } from '@/lib/server/auth';
 import { authClient } from '@/lib/auth-client';
 
 import InputTextField from '@/components/InputTextField';
 import '@/global.css';
 import { router } from 'expo-router';
 
-const ChangePasswordPage = () => {
-  const { data: session } = authClient.useSession();
-
+const changePasswordPage = () => {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -25,22 +24,38 @@ const ChangePasswordPage = () => {
 
   const handleSave = async () => {
     try {
+      setLoading(true);
+      setShowError(false);
+      setErrorMessage('');
+
+      if (!currentPassword || !newPassword || !confirmNewPassword)
+        throw new Error('All fields are required');
+
+      if (newPassword !== confirmNewPassword) throw new Error('Passwords do not match');
+
+      if (newPassword === currentPassword)
+        throw new Error('The new password has to be different from the old password');
+
       if (newPassword === confirmNewPassword) {
         const result = await authClient.changePassword({
           newPassword: newPassword,
           currentPassword: currentPassword,
-          revokeOtherSessions: true
-        })
+          revokeOtherSessions: true,
+        });
 
-        if (result.error) throw new Error(result.error.message)
+        if (result.error) throw new Error(result.error.message);
 
-        Alert.alert('Success', 'password changed')
-        router.back()
+        Alert.alert('Success', 'password changed');
 
-      } else throw new Error('Password not match')
+        router.back();
+      } else throw new Error('Password not match');
     } catch (e) {
-      console.log('Error saving new password: ' + e)
-      Alert.alert('Error', '' + e)
+      console.log('Error saving new password: ' + e);
+      Alert.alert('Error', '' + e);
+      setShowError(true);
+      setErrorMessage('' + e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,14 +91,20 @@ const ChangePasswordPage = () => {
           value={confirmNewPassword}
           onChangeText={setConfirmNewPassword}
         />
-      <View className="py-4">
-        <TouchableOpacity className="rounded-md bg-darkBlue p-4" onPress={handleSave}>
-          <Text className="text-center text-lg text-white">Save</Text>
-        </TouchableOpacity>
-      </View>
+        <View className="py-4">
+          <TouchableOpacity
+            className="rounded-md bg-darkBlue p-4"
+            disabled={loading}
+            onPress={handleSave}>
+            <Text className="text-center text-lg text-white">Save</Text>
+          </TouchableOpacity>
+          {Platform.OS === 'web' && showError && (
+            <Text className="pt-1 text-sm text-red-500">{errorMessage}</Text>
+          )}
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
 };
 
-export default ChangePasswordPage;
+export default changePasswordPage;
