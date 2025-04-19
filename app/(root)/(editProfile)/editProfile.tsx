@@ -22,14 +22,16 @@ import { Ionicons } from '@expo/vector-icons';
 import '@/global.css';
 
 const EdituserPage = () => {
-  const { data: session } = authClient.useSession()
-  
+  const { data: session } = authClient.useSession();
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(false)
-  const [name, setName] = useState(session?.user.name || '')
-  const [email, setEmail] = useState(session?.user.email || '')
+  const [loading, setLoading] = useState<boolean>(false);
+  const [name, setName] = useState(session?.user.name || '');
+  const [email, setEmail] = useState(session?.user.email || '');
   // @ts-ignore
-  const [username, setUsername] = useState(session?.user.username || '')
+  const [username, setUsername] = useState(session?.user.username || '');
 
   const showImageOptions = () => {
     if (session?.user.image) {
@@ -166,7 +168,18 @@ const EdituserPage = () => {
 
   const verifyEmail = async () => {
     try {
-      if (session?.user.emailVerified) return Alert.alert('Error', 'Email already verified');
+      setLoading(true);
+      setShowError(false);
+      setErrorMessage('');
+
+      if (session?.user.emailVerified) {
+        if (Platform.OS === 'web') {
+          setShowError(true);
+          setErrorMessage('Info: Email already verified');
+          return;
+        }
+        return Alert.alert('Info', 'Email already verified');
+      }
 
       await authClient.sendVerificationEmail({
         email: email,
@@ -174,8 +187,12 @@ const EdituserPage = () => {
       });
       Alert.alert('Email Verification', 'Verification email sent to: ' + email);
     } catch (e) {
+      setShowError(true);
+      setErrorMessage('' + e);
       console.error('Error sending verification email:', e);
       Alert.alert('Error', '' + e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -193,6 +210,11 @@ const EdituserPage = () => {
       }
 
       if (Object.keys(updateData).length === 0) {
+        if (Platform.OS === 'web') {
+          setShowError(true);
+          setErrorMessage('Error: No changes made');
+          return;
+        }
         Alert.alert('Error', 'No changes made');
         return;
       }
@@ -261,7 +283,7 @@ const EdituserPage = () => {
         />
       </View>
 
-      <View className="space-y-4 p-5">
+      <View className="p-5">
         <TouchableOpacity className="px-2 pb-2" onPress={() => router.push('/changePassword')}>
           <Text className="text-lg text-blue-500">Change Password</Text>
         </TouchableOpacity>
@@ -288,6 +310,10 @@ const EdituserPage = () => {
         <TouchableOpacity className="rounded-md bg-darkBlue p-4" onPress={handleSave}>
           <Text className="text-center text-lg text-white">Save</Text>
         </TouchableOpacity>
+
+        {Platform.OS === 'web' && showError && (
+          <Text className="pt-1 text-sm text-red-500">{errorMessage}</Text>
+        )}
       </View>
     </ScrollView>
   );

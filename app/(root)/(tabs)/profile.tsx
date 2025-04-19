@@ -46,7 +46,7 @@ const ProfilePage = () => {
         },
       ]);
     }
-  };
+  }
 
   const selectImage = async () => {
     try {
@@ -144,7 +144,7 @@ const ProfilePage = () => {
     } catch (error) {
       console.error('Error picking image:', error);
     }
-  };
+  }
 
   return (
     <View className="flex-1 bg-gray-50 pt-10">
